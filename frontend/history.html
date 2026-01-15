@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Asset History</title>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            background: #f4f6f9;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            border: none;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .logout-btn:hover {
+                background: #c0392b;
+            }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            table th, table td {
+                padding: 12px;
+                border-bottom: 1px solid #ddd;
+                text-align: left;
+                font-size: 14px;
+            }
+
+            table th {
+                background: #f0f0f0;
+            }
+
+        .assigned {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .unassigned {
+            color: #e67e22;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #3498db;
+            font-size: 14px;
+        }
+
+            .back-link:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+
+<body onload="checkAuth(); loadHistory();">
+
+    <!-- Header -->
+    <div class="header">
+        <h2>Admin Portal</h2>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Content -->
+    <div class="container">
+
+        <h3>Asset History</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>History ID</th>
+                    <th>Asset ID</th>
+                    <th>Employee ID</th>
+                    <th>Action</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="historyTable"></tbody>
+        </table>
+
+        <a class="back-link" href="admin-dashboard.html">← Back to Dashboard</a>
+
+    </div>
+
+    <script>
+        function loadHistory() {
+            fetch(`${API_BASE}/AssetHistory`)
+                .then(res => res.json())
+                .then(data => {
+                    const table = document.getElementById("historyTable");
+                    table.innerHTML = "";
+
+                    if (data.length === 0) {
+                        table.innerHTML = "<tr><td colspan='5'>No history available</td></tr>";
+                        return;
+                    }
+
+                    data.forEach(h => {
+                        const row = document.createElement("tr");
+
+                        row.innerHTML = `
+                                <td>${h.historyId}</td>
+                                <td>${h.assetId}</td>
+                                <td>${h.employeeId}</td>
+                                <td class="${h.action === "Assigned" ? "assigned" : "unassigned"}">
+                                    ${h.action}
+                                </td>
+                                <td>${new Date(h.actionDate).toLocaleString()}</td>
+                            `;
+
+                        table.appendChild(row);
+                    });
+                });
+        }
+    </script>
+
+</body>
+</html>

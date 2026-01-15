@@ -1,0 +1,68 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+button {
+    padding: 8px 15px;
+    border: none;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+    button:hover {
+        background: #0056b3;
+    }
+
+.logout-btn {
+    float: right;
+    background: #dc3545;
+}
+
+    .logout-btn:hover {
+        background: #b52a37;
+    }
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    table th, table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+        background: #f0f0f0;
+    }

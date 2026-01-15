@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="auth.js"></script>
+</head>
+
+<body onload="checkAuth()">
+
+    <div class="container">
+        <button class="logout-btn" onclick="logout()">Logout</button>
+        <h2>Admin Dashboard</h2>
+
+        <div class="card">
+            <a href="assets.html">Manage Assets</a>
+        </div>
+
+        <div class="card">
+            <a href="employees.html">Manage Employees</a>
+        </div>
+
+        <div class="card">
+            <a href="assignment.html">Assign / Unassign Assets</a>
+        </div>
+
+        <div class="card">
+            <a href="admin-requests.html">Asset Requests</a>
+        </div>
+
+        <div class="card">
+            <a href="history.html">Asset History</a>
+        </div>
+    </div>
+
+</body>
+</html>

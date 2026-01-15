@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>My Assets</title>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            background: #f4f6f9;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .header h2 {
+                margin: 0;
+                font-size: 20px;
+            }
+
+        .logout-btn {
+            background: #e74c3c;
+            border: none;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .logout-btn:hover {
+                background: #c0392b;
+            }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .asset-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .asset-list li {
+                background: #f9f9f9;
+                padding: 12px 15px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 14px;
+            }
+
+        .status {
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .empty {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #3498db;
+            font-size: 14px;
+        }
+
+            .back-link:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+
+<body onload="checkAuth(); loadMyAssets();">
+
+    <!-- Header -->
+    <div class="header">
+        <h2>Employee Portal</h2>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Content -->
+    <div class="container">
+
+        <h3>My Assigned Assets</h3>
+
+        <ul id="assetList" class="asset-list">
+            <!-- Assets loaded by JS -->
+        </ul>
+
+        <a class="back-link" href="employee-dashboard.html">← Back to Dashboard</a>
+
+    </div>
+
+    <!-- Optional UI enhancement for empty list -->
+    <script>
+        const originalLoadMyAssets = loadMyAssets;
+        loadMyAssets = function () {
+            originalLoadMyAssets();
+            setTimeout(() => {
+                const list = document.getElementById("assetList");
+                if (list.children.length === 0) {
+                    list.innerHTML = "<div class='empty'>No assets assigned to you</div>";
+                }
+            }, 300);
+        }
+    </script>
+
+</body>
+</html>
